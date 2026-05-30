@@ -39,8 +39,9 @@ class FullyConvGenerator(nn.Module):
         İstenilen boyutta (rows, cols) tahtayı dinamik olarak üretir.
         """
         # 1. Uzamsal Gürültü (Spatial Noise) Üretimi
-        # Gürültüyü artık sabit bir vektör olarak değil, istenen HxW boyutunda üretiyoruz.
-        z = torch.randn(1, self.latent_dim, rows, cols)
+        # 1. Uzamsal Gürültü (Spatial Noise) Üretimi
+        device = next(self.parameters()).device # Modelin GPU'da mı CPU'da mı olduğunu bul
+        z = torch.randn(1, self.latent_dim, rows, cols, device=device)
         
         # Olasılıkları hesapla -> Shape: (rows, cols)
         probs = self.forward(z).squeeze(0)
