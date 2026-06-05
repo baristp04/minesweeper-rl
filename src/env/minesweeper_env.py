@@ -17,14 +17,24 @@ class MinesweeperEnv(BaseEnvironment):
         valid_indices = np.argwhere(self.observation_board == -1)
         return [(int(r), int(c)) for r, c in valid_indices]
 
-    def __init__(self, rows: int = 9, cols: int = 9, num_mines: int = 10):
+    def __init__(self, rows: int = 9, cols: int = 9, num_mines=None):
         self.rows = rows
         self.cols = cols
-
-        # Safety Check: Prevent placing more mines than available cells
+        
         total_cells = self.rows * self.cols
+
+        # --- YENİ EKLENEN DİNAMİK HESAPLAMA ---
+        # Eğer dışarıdan özel bir mayın sayısı girilmediyse, tahtanın %15'ini mayın yap
+        if num_mines is None:
+            # 10x10'da 15 mayın, 20x20'de 60 mayın üretir. En az 1 mayın olmasını garantiler.
+            self.num_mines = max(1, int(total_cells * 0.15))
+        else:
+            self.num_mines = num_mines
+
+        # --- ARKADAŞLARININ YAZDIĞI ORİJİNAL GÜVENLİK KONTROLÜ (Aynen korundu) ---
+        # Safety Check: Prevent placing more mines than available cells
         # Cap the mines at total_cells - 1 (leave at least one safe cell)
-        self.num_mines = min(num_mines, total_cells - 1)
+        self.num_mines = min(self.num_mines, total_cells - 1)
 
         # internal_board: Keeps track of actual mine locations (-1) and neighbor counts (0-8)
         self.internal_board = np.zeros((self.rows, self.cols), dtype=np.int8)
