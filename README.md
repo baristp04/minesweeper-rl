@@ -56,5 +56,5 @@ python -m src.mlops.train
 * @baristp04: [https://github.com/baristp04](https://github.com/baristp04)
 * @Pherzan: [https://github.com/Pherzan](https://github.com/Pherzan)
 * @gokhanisavailable: [https://github.com/gokhanisavailable](https://github.com/gokhanisavailable)
-* @Arda-Aras103: [https://github.com/baristp04](https://github.com/Arda-Aras103)
-* @Beyazt43: [https://github.com/baristp04](https://github.com/Beyazt43)
+* @Arda-Aras103: [https://github.com/Arda-Aras103](https://github.com/Arda-Aras103)
+* @Beyazt43: [https://github.com/Beyazt43](https://github.com/Beyazt43)
